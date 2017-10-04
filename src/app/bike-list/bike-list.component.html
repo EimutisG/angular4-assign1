@@ -1,0 +1,48 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2><em>{{pageTitle}}</em></h2>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-2">Filter by:</div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-sm-4">Men <input type="checkbox" (change)="ckBoxClick('mens')" [(ngModel)]="ckMen"> </div>
+          <div class="col-sm-4">Women <input type="checkbox" (change)="ckBoxClick('womens')" [(ngModel)]="ckWomen"> </div>
+          <div class="col-sm-4">Kids <input type="checkbox" (change)="ckBoxClick('kids')" [(ngModel)]="ckKids"> </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              <button class="btn btn-primary" (click)="toggleImage()">{{showImage ? 'Hide' : 'Show'}} Image</button>
+            </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Price</th>
+            <th>5 Star Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bike of filteredBikes">
+            <td>
+              <img *ngIf="showImage" [src]="bike.imageUrl" [style.width.px]="imageWidth"/>
+            </td>
+            <td>{{bike.bikeName}}</td>
+            <td>{{bike.bikeCode | lowercase | convertToSpaces:'-'}}</td>
+            <td>{{bike.releaseDate}}</td>
+            <td>{{bike.price | currency:'EUR':1.2-2}}</td>
+            <td><app-star-rating [rating]="bike.starRating"></app-star-rating></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
